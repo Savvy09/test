@@ -21,11 +21,11 @@ class TestBot(commands.Bot):
 
     async def setup_hook(self) -> None:
         self.database_pool = await aiomysql.create_pool(
-            host="sql6.freemysqlhosting.net",
-            user="sql6505678",
-            db="sql6505678",
-            password="nh3Bk4hZzV",
-            port=int("3306"),
+            host=os.getenv("MYSQLHOST"),
+            user=os.getenv("MYSQLUSER"),
+            db=os.getenv("MYSQLDATABASE"),
+            password=os.getenv("MYSQLPASSWORD"),
+            port=int(os.getenv("MYSQLPORT")),
             loop=asyncio.get_event_loop(),
             autocommit=False,
         )
@@ -40,4 +40,4 @@ class TestBot(commands.Bot):
         ]
 
     def run(self) -> None:
-        super().run("OTY0NTQ0MTg3OTAxMDI2MzI0.YlmLxg.mQwZC9_UYJ3FiY2IumDFwW3AyUE")
+        super().run(os.getenv("APP_KEY"))
