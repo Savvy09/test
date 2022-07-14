@@ -26,7 +26,7 @@ class UserDB(DatabaseModel):
 
     async def read(self, user_id: int) -> bool:
         c = await self.exec_fetchone("SELECT * FROM users WHERE id = %s", (user_id,))
-        return True if c is not None else False
+        return True if c else False
 
     async def create(self, user_id: int) -> bool:
         _check = await self.read(user_id)
